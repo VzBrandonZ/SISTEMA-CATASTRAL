@@ -162,9 +162,10 @@ ID_POBLACION
 /* Table: FICHA_PREDIO                                          */
 /*==============================================================*/
 create table FICHA_PREDIO (
-   ID_PROPIETARIO       INT8                not null,
+   ID_PROPIETARIO       INT8                 not null,
    ID_PREDIO            INT8                 not null,
    ID_CATASTRAL         INT8                 not null,
+   TIPO_PROPIETARIOS    CHAR(50)              not null, 
    constraint PK_FICHA_PREDIO primary key (ID_PROPIETARIO, ID_PREDIO)
 );
 
@@ -261,10 +262,9 @@ create table NOTARIA (
    ID_NOT               INT8                 not null,
    NOMBRE_NOT           CHAR(50)             not null,
    REPRESENTANTE_NOT    CHAR(50)             not null,
-   CALLE_PRINCIPAL_NOT  CHAR(50)             not null,
-   CALLE_SECUNDARIA_NOT CHAR(50)             not null,
-   SITIO_REFERENCIA_NOT CHAR(50)             not null,
-   TELEFONO_NOT         CHAR(50)             null,
+   CALLE_PRINCIPAL_NOT  CHAR(50)              null,
+   SITIO_REFERENCIA_NOT CHAR(50)              null,
+   TELEFONO_NOT         CHAR(50)             not null,
    constraint PK_NOTARIA primary key (ID_NOT)
 );
 
@@ -281,7 +281,6 @@ ID_NOT
 create table OTRA_INSTALACION (
    ID_INSTALCION        INT8                 not null,
    NOMBRE_INSTALACION   CHAR(50)             not null,
-   AREA_INSTALACION     CHAR(50)             not null,
    constraint PK_OTRA_INSTALACION primary key (ID_INSTALCION)
 );
 
