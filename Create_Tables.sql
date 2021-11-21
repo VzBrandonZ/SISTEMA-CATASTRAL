@@ -26,8 +26,7 @@ create table AVALUO_CATASTRAL (
    IMP_SEGURIDAD        MONEY                not null,
    IMP_BOMBERO          MONEY                not null,
    IMP_PREDIAL          MONEY                not null,
-   IMP_TOTAL            MONEY                not null,
-   constraint PK_AVALUO_CATASTRAL primary key (ID_CATASTRAL)
+   IMP_TOTAL            MONEY                not null
 );
 
 /*==============================================================*/
@@ -66,8 +65,7 @@ ID_CANTON
 create table CARTOGRAFIA (
    ID_PREDIO            INT8                 not null,
    COORDENADA_X         CHAR(50)             not null,
-   COORDENADA_Y         CHAR(50)             not null,
-   constraint PK_CARTOGRAFIA primary key (ID_PREDIO)
+   COORDENADA_Y         CHAR(50)             not null
 );
 
 /*==============================================================*/
@@ -120,7 +118,6 @@ create table FICHA_CATASTRAL (
    ID_ADQUISICION       INT8                 null,
    ID_USO               INT8                 null,
    ID_POBLACION         INT8                 null,
-   ID_REGISTRO          INT8                 not null,
    CLAVE_CATASTRAL      CHAR(50)             not null,
    constraint PK_FICHA_CATASTRAL primary key (ID_CATASTRAL)
 );
@@ -160,12 +157,6 @@ create  index INDEX_POBLACION_FK on FICHA_CATASTRAL (
 ID_POBLACION
 );
 
-/*==============================================================*/
-/* Index: INDEX_REGISTRO_FK                                     */
-/*==============================================================*/
-create  index INDEX_REGISTRO_FK on FICHA_CATASTRAL (
-ID_REGISTRO
-);
 
 /*==============================================================*/
 /* Table: FICHA_PREDIO                                          */
@@ -427,7 +418,7 @@ create table PROPIETARIO (
    ID_PROPIETARIO       INT8                 not null,
    NRO_TITULO_PROPIEDAD INT8                 not null,
    constraint PK_PROPIETARIO primary key (ID_PROPIETARIO)
-);
+) INHERITS (PERSONA);
 
 /*==============================================================*/
 /* Index: INDEX_PROPIETARIO_PK                                  */
@@ -456,17 +447,17 @@ ID_PROVINCIA
 /* Table: REGISTRO_LEGAL                                        */
 /*==============================================================*/
 create table REGISTRO_LEGAL (
-   ID_REGISTRO          INT8                 not null,
+   ID_CATASTRAL          INT8                not null,
    ID_NOT               INT8                 not null,
-   FECHA_ESCRITURA      DATE                 not null,
-   constraint PK_REGISTRO_LEGAL primary key (ID_REGISTRO)
+   NRO_CERTIFICADO      INT8                 not null,
+   FECHA_ESCRITURA      DATE                 not null
 );
 
 /*==============================================================*/
-/* Index: INDEX_REGISTRO_LEGAL_PK                               */
+/* Index: INDEX_REGISTRO_CATASTRAL_PK                               */
 /*==============================================================*/
-create unique index INDEX_REGISTRO_LEGAL_PK on REGISTRO_LEGAL (
-ID_REGISTRO
+create unique index INDEX_REGISTRO_CATASTRAL_PK on REGISTRO_LEGAL (
+ID_CATASTRAL
 );
 
 /*==============================================================*/
@@ -704,11 +695,11 @@ ID_ZONA
 /*==============================================================*/
 /* Foreign key: AVALUO_CATASTRAL                                */
 /*==============================================================*/
-/*alter table AVALUO_CATASTRAL
+alter table AVALUO_CATASTRAL
    add constraint FK_AVALUO_C_RELATIONS_FICHA_CA foreign key (ID_CATASTRAL)
       references FICHA_CATASTRAL (ID_CATASTRAL)
       on delete restrict on update restrict;
-*/
+
 /*==============================================================*/
 /* Foreign key: CARTOGRAFIA                                     */
 /*==============================================================*/
@@ -743,10 +734,6 @@ alter table FICHA_CATASTRAL
       references TIPO_POBLACION (ID_POBLACION)
       on delete restrict on update restrict;
 
-alter table FICHA_CATASTRAL
-   add constraint FK_FICHA_CA_RELATIONS_REGISTRO foreign key (ID_REGISTRO)
-      references REGISTRO_LEGAL (ID_REGISTRO)
-      on delete restrict on update restrict;
 
 /*alter table FICHA_CATASTRAL
    add constraint FK_FICHA_CA_RELATIONS_AVALUO_C foreign key (ID_AVAEIMP)
