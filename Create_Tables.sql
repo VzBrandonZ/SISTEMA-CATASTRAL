@@ -18,21 +18,31 @@ ID_ADQUISICION
 /* Table: AVALUO_CATASTRAL                                      */
 /*==============================================================*/
 create table AVALUO_CATASTRAL (
-   ID_CATASTRAL         INT8                 not null,
-   AVA_PREDIO           MONEY                not null,
-   AVA_CONSTRUCCION     MONEY                not null,
-   AVA_OTRO             MONEY                not null,
-   AVA_TOTAL            MONEY                not null,
-   IMP_SEGURIDAD        MONEY                not null,
-   IMP_BOMBERO          MONEY                not null,
-   IMP_PREDIAL          MONEY                not null,
-   IMP_TOTAL            MONEY                not null
+   ID_AVA_IMP           INT8                   not null,
+   ID_CATASTRAL         INT8                   not null,
+   AVA_PREDIO           NUMERIC                not null,
+   AVA_CONSTRUCCION     NUMERIC                not null,
+   AVA_OTRO             NUMERIC                not null,
+   AVA_TOTAL            NUMERIC                not null,
+   IMP_SEGURIDAD        NUMERIC                not null,
+   IMP_BOMBERO          NUMERIC                not null,
+   IMP_PREDIAL          NUMERIC                not null,
+   IMP_TOTAL            NUMERIC                not null,
+   constraint PK_AVALUO_CATASTRAL primary key (ID_AVA_IMP)
+
 );
 
 /*==============================================================*/
 /* Index: AVALUO_CATASTRAL_PK                                   */
 /*==============================================================*/
 create unique index AVALUO_CATASTRAL_PK on AVALUO_CATASTRAL (
+ID_AVA_IMP
+);
+
+/*==============================================================*/
+/* Index: AVALUO_CATASTRAL_PK                                   */
+/*==============================================================*/
+create unique index AVALUO_CATASTRAL_FK on AVALUO_CATASTRAL (
 ID_CATASTRAL
 );
 
@@ -48,7 +58,7 @@ ID_CATASTRAL
 /*==============================================================*/
 create table CANTON (
    ID_CANTON            INT2                 not null,
-   ATTRIBUTE_6          CHAR(50)             not null,
+   NOMBRE_CANTON          CHAR(50)             not null,
    constraint PK_CANTON primary key (ID_CANTON)
 );
 
@@ -62,25 +72,28 @@ ID_CANTON
 /*==============================================================*/
 /* Table: CARTOGRAFIA                                           */
 /*==============================================================*/
-create table CARTOGRAFIA (
+create table CARTOGRAFIA ( 
+   ID_CARTOGRAFIA       INT8                 not null,
    ID_PREDIO            INT8                 not null,
    COORDENADA_X         CHAR(50)             not null,
-   COORDENADA_Y         CHAR(50)             not null
+   COORDENADA_Y         CHAR(50)             not null,
+   constraint PK_CARTOGRAFIA primary key (ID_CARTOGRAFIA)
+   
 );
 
 /*==============================================================*/
 /* Index: CARTOGRAFIA_PK                                        */
 /*==============================================================*/
 create unique index CARTOGRAFIA_PK on CARTOGRAFIA (
-ID_PREDIO
+ID_CARTOGRAFIA
 );
 
 /*==============================================================*/
-/* Index: RELATIONSHIP_12_FK                                    */
+/* Index: CARTOGRAFIA_PK                                        */
 /*==============================================================*/
-/*create  index RELATIONSHIP_12_FK on CARTOGRAFIA (
+create unique index CARTOGRAFIA_PREDIO_FK on CARTOGRAFIA (
 ID_PREDIO
-);*/
+);
 
 /*==============================================================*/
 /* Table: CONSTRUCCION                                          */
@@ -118,7 +131,7 @@ create table FICHA_CATASTRAL (
    ID_ADQUISICION       INT8                 null,
    ID_USO               INT8                 null,
    ID_POBLACION         INT8                 null,
-   CLAVE_CATASTRAL      CHAR(50)             not null,
+   CLAVE_CATASTRAL      CHAR(50)     unique  not null,
    constraint PK_FICHA_CATASTRAL primary key (ID_CATASTRAL)
 );
 
@@ -164,7 +177,6 @@ ID_POBLACION
 create table FICHA_PREDIO (
    ID_PROPIETARIO       INT8                 not null,
    ID_PREDIO            INT8                 not null,
-   ID_CATASTRAL         INT8                 not null,
    TIPO_PROPIETARIOS    CHAR(50)              not null, 
    constraint PK_FICHA_PREDIO primary key (ID_PROPIETARIO, ID_PREDIO)
 );
@@ -189,13 +201,6 @@ ID_PREDIO
 /*==============================================================*/
 create  index INDEX_FPROPIETARIO_FK on FICHA_PREDIO (
 ID_PROPIETARIO
-);
-
-/*==============================================================*/
-/* Index: INDEX_FCATASTRAL                                      */
-/*==============================================================*/
-create  index INDEX_FCATASTRAL on FICHA_PREDIO (
-ID_CATASTRAL
 );
 
 /*==============================================================*/
@@ -403,12 +408,35 @@ ID_RODADURA
 );
 
 /*==============================================================*/
-/* Index: INDEX_PREDIO_CARTOGRAFIA_FK                           */
+/* Table: PREDIO_CATASTRAL                                      */
 /*==============================================================*/
-/*create  index INDEX_PREDIO_CARTOGRAFIA_FK on PREDIO (
-ID_CARTOGRAFIA
+create table PREDIO_CATASTRAL (
+   ID_PREDIO            INT8                 not null,
+   ID_CATASTRAL         INT8                 not null,
+   constraint PK_PREDIO_CATASTRAL primary key (ID_PREDIO, ID_CATASTRAL)
 );
-*/
+
+/*==============================================================*/
+/* Index: INDEX_PREDIO_CATASTRAL_PK                             */
+/*==============================================================*/
+create unique index INDEX_PREDIO_CATASTRAL_PK on PREDIO_CATASTRAL (
+ID_PREDIO,
+ID_CATASTRAL
+);
+
+/*==============================================================*/
+/* Index: INDEX_PREDIO_CATASTRAL2_PK                            */
+/*==============================================================*/
+create unique index INDEX_PREDIO_CATASTRAL2_PK on PREDIO_CATASTRAL (
+ID_PREDIO
+);
+
+/*==============================================================*/
+/* Index: INDEX_PREDIO_CATASTRAL3_PK                            */
+/*==============================================================*/
+create unique index INDEX_PREDIO_CATASTRAL3_PK on PREDIO_CATASTRAL (
+ID_CATASTRAL
+);
 
 /*==============================================================*/
 /* Table: PROPIETARIO                                           */
@@ -446,10 +474,18 @@ ID_PROVINCIA
 /* Table: REGISTRO_LEGAL                                        */
 /*==============================================================*/
 create table REGISTRO_LEGAL (
-   ID_CATASTRAL          INT8                not null,
+   ID_REGISTRO          INT8                 not null,  
+   ID_CATASTRAL         INT8                 not null,
    ID_NOT               INT8                 not null,
+   FECHA_ESCRITURA      DATE                 not null,
    NRO_CERTIFICADO      INT8                 not null,
-   FECHA_ESCRITURA      DATE                 not null
+   constraint PK_REGISTRO_LEGAL primary key (ID_REGISTRO)
+);
+/*==============================================================*/
+/* Index: INDEX_REGISTRO_CATASTRAL_PK                           */
+/*==============================================================*/
+create unique index INDEX_REGISTRO_REGISTRO_PK on REGISTRO_LEGAL (
+ID_REGISTRO
 );
 
 /*==============================================================*/
@@ -539,9 +575,10 @@ create table SOLICITUD (
    ID_PROPIETARIO       INT8                 not null,
    ID_TECNICO           INT8                 not null,
    ESTADO_SOLICITUD     CHAR(50)             not null,
-   FECHA_INICIO         DATE                 not null,
-   FECHA_FINAL          DATE                 not null,
-   MONTO_PAGAR          MONEY                not null,
+   FECHA_SOLICITUD      DATE                 not null,
+   FECHA_INICIO         DATE                     null,
+   FECHA_FINAL          DATE                     null,
+   MONTO_PAGAR          NUMERIC                  null,
    constraint PK_SOLICITUD primary key (ID_SOLICITUD)
 );
 
@@ -587,6 +624,8 @@ create table TECNICO (
    ID_TECNICO           INT8                 not null,
    ID_SERV_TECNICO      INT8                 not null,
    FECHA_CONT_TECNICO   DATE                 not null,
+   PAGO_MENSUAL         NUMERIC              not null,
+   PAGO_ANUAL           NUMERIC              not null, 
    constraint PK_TECNICO primary key (ID_TECNICO)
 ) INHERITS(PERSONA);
 
@@ -754,11 +793,6 @@ alter table FICHA_PREDIO
       references PREDIO (ID_PREDIO)
       on delete restrict on update restrict;
 
-alter table FICHA_PREDIO
-   add constraint FK_FICHA_PR_RELATIONS_FICHA_CA foreign key (ID_CATASTRAL)
-      references FICHA_CATASTRAL (ID_CATASTRAL)
-      on delete restrict on update restrict;
-
 
 
 /*==============================================================*/
@@ -832,6 +866,22 @@ alter table PREDIO
 
 
 /*==============================================================*/
+/* Foreign key: PREDIO_CATASTRAL                                */
+/*==============================================================*/
+      alter table PREDIO_CATASTRAL
+   add constraint FK_PREDIO_C_RELATIONS_PREDIO foreign key (ID_PREDIO)
+      references PREDIO (ID_PREDIO)
+      on delete restrict on update restrict;
+
+alter table PREDIO_CATASTRAL
+   add constraint FK_PREDIO_C_RELATIONS_FICHA_CA foreign key (ID_CATASTRAL)
+      references FICHA_CATASTRAL (ID_CATASTRAL)
+      on delete restrict on update restrict;
+
+
+
+
+/*==============================================================*/
 /* Foreign key: PROPIETARIO                                     */
 /*==============================================================*/
 /*alter table PROPIETARIO
@@ -871,7 +921,7 @@ alter table FICHA_INSTALACION
 
 
 /*==============================================================*/
-/* Foreign key: REGISTRO_LEGAL                                  */
+/* Foreign key: SOLICITUD                                       */
 /*==============================================================*/
 
 alter table SOLICITUD
