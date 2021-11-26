@@ -4,9 +4,9 @@ Creacion de la db y de las consultas solicitadas, con trigger, cursores, procedi
 
 Elaborado con:
 
-1. PostgreSQL
-2. PowerDesigner
-3. Ireport
+1. [PostgreSQL](https://www.postgresql.org/download/)(Te saldra para varios S.O)
+2. [PowerDesigner v16.5](https://www.mediafire.com/file/u81z9uk5441n27o/PowerDesigner.rar/file)
+3. [Ireport v](https://www.mediafire.com/file/cpctkkv51doqb8u/IReport.rar/file) (Se debe tener tener instalado JRE7, si no lo tienes en la descarga de IReport te saldra el de 32 y 64 bit)
 
 
 <div align = center><h2>Parte 1</h2></div>
@@ -36,7 +36,7 @@ Elaborado con:
  
  
  
- Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+ Use the package manager  to install foobar.
 
 ```bash
 pip install foobar
