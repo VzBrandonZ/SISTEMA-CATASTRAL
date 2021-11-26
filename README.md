@@ -35,6 +35,14 @@ Elaborado con:
  
  
  
+ 
+ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+
+```bash
+pip install foobar
+```
+ 
+ 
 <div align = center><h1>MODELO LOGICO</h1></div>
  
  
