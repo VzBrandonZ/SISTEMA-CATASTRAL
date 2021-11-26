@@ -5,7 +5,7 @@ Creacion de la db y de las consultas solicitadas, con trigger, cursores, procedi
 Elaborado con:
 
 1. [PostgreSQL](https://www.postgresql.org/download/)(Te saldra para varios S.O)
-2. [PowerDesigner v16.5](https://www.mediafire.com/file/u81z9uk5441n27o/PowerDesigner.rar/file)
+2. [PowerDesigner v16.5](https://www.mediafire.com/file/pibsbgnxemrv56h/PowerDesigner.rar/file)
 3. [Ireport v](https://www.mediafire.com/file/cpctkkv51doqb8u/IReport.rar/file) (Se debe tener tener instalado JRE7, si no lo tienes en la descarga de IReport te saldra el de 32 y 64 bit, las intrucciones esta adentro del archivo, para el error de dirección.)
 
 
@@ -34,13 +34,6 @@ Elaborado con:
  ![alt text](https://github.com/VzBrandonZ/SISTEMA-CATASTRAL/blob/main/MODELO_CONCEPTUAL_CATASTRAL_ORIGINAL.jpg)
  
  
- 
- 
- Use the package manager  to install foobar.
-
-```bash
-pip install foobar
-```
  
  
 <div align = center><h1>MODELO LOGICO</h1></div>
