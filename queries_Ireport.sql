@@ -5,4 +5,4 @@ SELECT
 FROM servicio_tecnico
 INNER JOIN solicitud ON servicio_tecnico.id_serv_tecnico = solicitud.id_serv_tecnico
 GROUP BY Servicio
-ORDER BY Total_pagos;
+ORDER BY Total_pagos DESC;
