@@ -3,7 +3,7 @@ Creacion de la db y de las consultas solicitadas, con trigger, cursores, procedi
 Elaboracion con PostgreSQL
 
 
-##<center>Parte1</center>
+##Parte1  <div align = right> alinear a la derecha </div>
 
 ### 1. Creacion de base de datos Sistema_Catastral.
 ### 2. Creacion de tablas.
