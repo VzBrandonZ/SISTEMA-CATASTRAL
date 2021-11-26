@@ -3,9 +3,10 @@
 Creacion de la db y de las consultas solicitadas, con trigger, cursores, procedimientos almacenado.
 
 Elaborado con:
-1.PostgreSQL
-2.PowerDesigner
-3.Ireport
+
+1. PostgreSQL
+2. PowerDesigner
+3. Ireport
 
 
 <div align = center><h2>Parte 1</h2></div>
