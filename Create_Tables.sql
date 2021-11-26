@@ -143,13 +143,6 @@ ID_CATASTRAL
 );
 
 /*==============================================================*/
-/* Index: INDEX_AVAEIMP_FK                                      */
-/*==============================================================*/
-/*create  index INDEX_AVAEIMP_FK on FICHA_CATASTRAL (
-ID_AVAEIMP
-);
-*/
-/*==============================================================*/
 /* Index: INDEX_ADQUISICION_FK                                  */
 /*==============================================================*/
 create  index INDEX_ADQUISICION_FK on FICHA_CATASTRAL (
@@ -773,11 +766,6 @@ alter table FICHA_CATASTRAL
       on delete restrict on update restrict;
 
 
-/*alter table FICHA_CATASTRAL
-   add constraint FK_FICHA_CA_RELATIONS_AVALUO_C foreign key (ID_AVAEIMP)
-      references AVALUO_CATASTRAL (ID_AVAEIMP)
-      on delete restrict on update restrict;
-*/
 
 
 /*==============================================================*/
@@ -830,13 +818,6 @@ alter table PREDIO
       references ZONA (ID_ZONA)
       on delete restrict on update restrict;
 
-/*
-alter table PREDIO
-   add constraint FK_PREDIO_RELATIONS_CARTOGRA foreign key (ID_CARTOGRAFIA)
-      references CARTOGRAFIA (ID_CARTOGRAFIA)
-      on delete restrict on update restrict;
-*/
-
 alter table PREDIO
    add constraint FK_PREDIO_RELATIONS_PROVINCI foreign key (ID_PROVINCIA)
       references PROVINCIA (ID_PROVINCIA)
@@ -877,19 +858,6 @@ alter table PREDIO_CATASTRAL
    add constraint FK_PREDIO_C_RELATIONS_FICHA_CA foreign key (ID_CATASTRAL)
       references FICHA_CATASTRAL (ID_CATASTRAL)
       on delete restrict on update restrict;
-
-
-
-
-/*==============================================================*/
-/* Foreign key: PROPIETARIO                                     */
-/*==============================================================*/
-/*alter table PROPIETARIO
-   add constraint FK_PROPIETA_INHERITAN_PERSONA foreign key (ID_PERSONA)
-      references PERSONA (ID_PERSONA)
-      on delete restrict on update restrict;*/
-
-
 
 
 /*==============================================================*/
@@ -954,12 +922,3 @@ alter table TECNICO
    add constraint FK_TECNICO_RELATIONS_SERVICIO foreign key (ID_SERV_TECNICO)
       references SERVICIO_TECNICO (ID_SERV_TECNICO)
       on delete restrict on update restrict;
-
-
-/*
-
-alter table TECNICO
-   add constraint FK_TECNICO_INHERITAN_PERSONA foreign key (ID_PERSONA)
-      references PERSONA (ID_PERSONA)
-      on delete restrict on update restrict;
-*/
