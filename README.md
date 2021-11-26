@@ -1,4 +1,4 @@
-<div align = center> #SISTEMA CATASTRAL</div>
+<div align = center> <h1>SISTEMA CATASTRAL</h1> </div>
 
 Creacion de la db y de las consultas solicitadas, con trigger, cursores, procedimientos almacenado.
 Elaboracion con PostgreSQL
