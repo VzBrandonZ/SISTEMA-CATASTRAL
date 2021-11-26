@@ -69,4 +69,3 @@ WHERE solicitud.fecha_solicitud BETWEEN '2021/01/01' AND '2021/12/31'
 GROUP BY Año, Zona, Provincia, Canton, 
 Parroquia, Solicitud_Servicio
 ORDER BY Zona
-
