@@ -1,7 +1,11 @@
 <div align = center><h1>SISTEMA CATASTRAL</h1></div>
 
 Creacion de la db y de las consultas solicitadas, con trigger, cursores, procedimientos almacenado.
-Elaboracion con PostgreSQL
+
+Elaborado con:
+1.PostgreSQL
+2.PowerDesigner
+3.Ireport
 
 
 <div align = center><h2>Parte 1</h2></div>
