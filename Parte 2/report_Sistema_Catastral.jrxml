@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_Sistema_Catastral" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9c153aec-8462-4081-93ee-3c2f3173ab81">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+    servicio_tecnico.nombre_serv_tecnico AS Servicio,
+    SUM(solicitud.monto_pagar) AS Total_pagos
+FROM servicio_tecnico
+INNER JOIN solicitud ON servicio_tecnico.id_serv_tecnico = solicitud.id_serv_tecnico
+GROUP BY Servicio
+ORDER BY Total_pagos DESC;]]>
+	</queryString>
+	<field name="servicio" class="java.lang.String"/>
+	<field name="total_pagos" class="java.math.BigDecimal"/>
+	<variable name="total_pagos_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_pagos}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="176" y="21" width="393" height="38" uuid="501d50e4-1d75-4bd0-8d0b-5ce367a45a5d"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE SERVICIOS DADOS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="65" y="2" width="183" height="31" uuid="1efeaae0-ba9f-48a9-ab2e-8083826ed4a9"/>
+				<textElement textAlignment="Center">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Servicios]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="532" y="2" width="183" height="31" uuid="1b47ed64-23c5-4c01-afd0-e60179104a50"/>
+				<textElement textAlignment="Center">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Ingresos]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="109" y="3" width="186" height="20" uuid="131562c9-09bc-4f54-b2f2-bfce5f58996b"/>
+				<textFieldExpression><![CDATA[$F{servicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="567" y="3" width="100" height="20" uuid="5c0d9367-81e2-474c-8870-ce000e815757"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{total_pagos}+'$']]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="568" y="4" width="100" height="20" uuid="258f1100-7723-4486-8166-ac591b528529"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{total_pagos_1}+'$']]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="422" y="-2" width="110" height="26" uuid="8a10e052-cb53-4c7d-9337-d2ce2f298bdb"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="247" splitType="Stretch">
+			<stackedBar3DChart>
+				<chart>
+					<reportElement x="0" y="0" width="802" height="247" uuid="c97186d8-abe1-41c6-b82f-72cccf23a091"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{servicio}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{servicio}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{total_pagos}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot isShowLabels="true" xOffset="20.0" yOffset="5.0">
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+					<rangeAxisMaxValueExpression><![CDATA[1300]]></rangeAxisMaxValueExpression>
+				</bar3DPlot>
+			</stackedBar3DChart>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="10" splitType="Stretch"/>
+	</summary>
+</jasperReport>
