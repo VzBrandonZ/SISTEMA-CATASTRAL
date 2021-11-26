@@ -427,33 +427,70 @@ INSERT INTO solicitud VALUES    (1,2,1,3,1,'Finalizado', '2020/01/05', '2020/01/
                                 (7,7,2,7,2,'Finalizado', '2020/03/05', '2020/03/10', '2020/06/11',170),
                                 (8,8,3,8,3,'Finalizado', '2020/03/04', '2020/03/10', '2020/05/15',100),
                                 
-                                (9,2,2,3,2,'Aprobado', '2021/01/05', '2021/01/10', '2021/06/15',170),
-                                (10,1,1,2,1,'Aprobado', '2021/01/10', '2021/01/15', '2021/04/12',100),
-                                (11,3,4,4,4,'Aprobado', '2021/02/15', '2021/02/20', '2021/07/21',140),
-                                (12,4,3,1,3,'Aprobado', '2021/03/05', '2021/03/10', '2021/06/10',120),
-                                (13,5,5,5,5,'Aprobado', '2021/04/04', '2021/04/10', '2021/06/15',120),
-                                (14,6,5,6,5,'Aprobado', '2021/04/10', '2021/05/15', '2021/06/10',130),
-                                (15,7,4,7,4,'Aprobado', '2021/05/03', '2021/05/10', '2021/08/10',100),
-                                (16,8,1,7,6,'Aprobado', '2021/05/04', '2021/05/10', '2021/07/05',110),
-                                                                
-                                (17,2,2,3,7,'Aprobado', '2021/05/15', '2021/05/20', '2021/07/15',160),
-                                (18,1,3,2,8,'Aprobado', '2021/05/11', '2021/05/15', '2021/07/10',120),
-                                (19,1,1,2,6,'Aprobado', '2021/06/11', '2021/06/15', '2021/07/10',120),
-                                (20,1,2,4,7,'Aprobado', '2021/06/05', '2021/06/10', '2021/07/10',120),
-                                (21,2,3,3,8,'Aprobado', '2021/06/01', '2021/06/05', '2021/07/20',120),
-                                (22,1,1,6,6,'Aprobado', '2021/07/05', '2021/07/15', '2021/08/23',120),
-                                (23,4,2,1,7,'Aprobado', '2021/07/09', '2021/07/15', '2021/08/27',120),
-                                (24,1,3,2,8,'Aprobado', '2021/07/11', '2021/07/15', '2021/08/15',120),
-                                (25,3,5,4,5,'Pendiente', '2021/07/05', default, default,default),
-                                (26,4,2,1,2,'Pendiente', '2021/07/08', default, default,default),
-                                (27,5,2,5,2,'Pendiente', '2021/08/12', default, default,default),
-                                (28,6,3,6,3,'Pendiente', '2021/08/15', default, default,default),
-                                (29,7,1,7,1,'Pendiente', '2021/08/25', default, default,default),
-                                (30,8,2,8,2,'Pendiente', '2021/08/28', default, default,default),
+                                (9,2,2,3,2,'Aprobado', '2021/01/05', '2021/01/10', default,170),
+                                (10,1,1,2,1,'Aprobado', '2021/01/10', '2021/01/15', default,100),
+                                (11,3,4,4,4,'Aprobado', '2021/02/15', '2021/02/20', default,140),
+                                (12,4,3,1,3,'Aprobado', '2021/03/05', '2021/03/10', default,120),
+                                (13,5,5,5,5,'Aprobado', '2021/04/04', '2021/04/10', default,120),
+                                (14,6,5,6,5,'Aprobado', '2021/04/10', '2021/05/15', default,130),
+                                (15,7,4,7,4,'Aprobado', '2021/05/03', '2021/05/10', default,100),
+                                (16,8,1,7,6,'Aprobado', '2021/05/04', '2021/05/10', default,110),
+
+                                (17,2,1,3,1,'Aprobado', '2021/01/05', '2021/01/10', default,170),
+                                (18,1,2,2,2,'Aprobado', '2021/01/10', '2021/01/15', default,100),
+                                (19,3,3,4,3,'Aprobado', '2021/02/15', '2021/02/20', default,140),
+                                (20,4,2,1,2,'Aprobado', '2021/03/05', '2021/03/10', default,120),
+                                (21,5,1,5,1,'Aprobado', '2021/04/04', '2021/04/10', default,120),
+                                (22,6,3,6,3,'Aprobado', '2021/04/10', '2021/05/15', default,130),
+                                (23,7,4,7,4,'Aprobado', '2021/05/03', '2021/05/10', default,100),
+                                (24,8,1,7,5,'Aprobado', '2021/05/04', '2021/05/10', default,110),
+                                                                                                
+                                (25,2,2,3,7,'Aprobado', '2021/05/15', '2021/05/20', default,160),
+                                (26,1,3,2,8,'Aprobado', '2021/05/11', '2021/05/15', default,120),
+                                (27,1,1,2,6,'Aprobado', '2021/06/11', '2021/06/15', default,120),
+                                (28,1,2,4,7,'Aprobado', '2021/06/05', '2021/06/10', default,120),
+                                (29,2,3,3,8,'Aprobado', '2021/06/01', '2021/06/05', default,120),
+                                (30,1,1,6,6,'Aprobado', '2021/07/05', '2021/07/15', default,120),
+                                (31,4,2,1,7,'Aprobado', '2021/07/09', '2021/07/15', default,120),
+                                (32,1,3,2,8,'Aprobado', '2021/07/11', '2021/07/15', default,120),
+                                (33,3,5,4,5,'Pendiente', '2021/07/05', default, default,default),
+                                (34,4,2,1,2,'Pendiente', '2021/07/08', default, default,default),
+                                (35,5,2,5,2,'Pendiente', '2021/08/12', default, default,default),
+                                (36,6,3,6,3,'Pendiente', '2021/08/15', default, default,default),
+                                (38,7,1,7,1,'Pendiente', '2021/08/25', default, default,default),
+                                (39,8,2,8,2,'Pendiente', '2021/08/28', default, default,default),
                                 
-                                (31,2,3,3,3,'Pendiente', '2021/09/10', default, default,default),
-                                (32,1,3,2,3,'Pendiente', '2021/09/18', default, default,default),
-                                (33,3,2,4,2,'Pendiente', '2021/09/25', default, default,default),
-                                (34,4,1,1,1,'Pendiente', '2021/10/15', default, default,default),
-                                (35,5,2,5,2,'Pendiente', '2021/10/25', default, default,default),
-                                (36,6,2,6,2,'Pendiente', '2021/11/18', default, default,default);
+                                (40,2,3,3,3,'Pendiente', '2021/09/10', default, default,default),
+                                (41,1,3,2,3,'Pendiente', '2021/09/18', default, default,default),
+                                (42,3,2,4,2,'Pendiente', '2021/09/25', default, default,default),
+                                (43,4,1,1,1,'Pendiente', '2021/10/15', default, default,default),
+                                (44,5,2,5,2,'Pendiente', '2021/10/25', default, default,default),
+                                (45,6,2,6,2,'Pendiente', '2021/11/18', default, default,default);
+
+
+
+/*select * from tecnico
+select * from persona
+select * from zona
+select * from provincia
+select * from canton
+select * from parroquia
+select * from tipo_via
+select * from tipo_rodadura
+select * from predio
+select * from lote
+select * from cartografia
+select * from ficha_predio
+select * from tipo_poblacion
+select * from uso
+select * from adquisicion
+select * from servicio_basico
+select * from otra_instalacion
+select * from ficha_catastral
+select * from notaria
+select * from registro_legal
+select * from construccion
+select * from ficha_servicio_basico
+select * from ficha_instalacion
+select * from ficha_instalacion
+select * from avaluo_catastral*/
