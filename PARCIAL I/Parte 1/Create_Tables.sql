@@ -73,7 +73,7 @@ ID_CANTON
 /* Table: CARTOGRAFIA                                           */
 /*==============================================================*/
 create table CARTOGRAFIA ( 
-   ID_CARTOGRAFIA       INT8                 not null,
+   ID_CARTOGRAFIA       SERIAL               not null,
    ID_PREDIO            INT8                 not null,
    COORDENADA_X         CHAR(50)             not null,
    COORDENADA_Y         CHAR(50)             not null,
@@ -231,7 +231,7 @@ ID_SERV_BASICO
 /* Table: LOTE                                                  */
 /*==============================================================*/
 create table LOTE (
-   ID_LOTE              INT8                 not null,
+   ID_LOTE              SERIAL               not null,
    ID_PREDIO            INT8                 not null,
    CANTIDAD_LOTE        INT8                 not null,
    AREA_LOTE            CHAR(50)             not null,
@@ -257,7 +257,7 @@ ID_PREDIO
 /* Table: NOTARIA                                               */
 /*==============================================================*/
 create table NOTARIA (
-   ID_NOT               INT8                 not null,
+   ID_NOT               SERIAL               not null,
    NOMBRE_NOT           CHAR(50)             not null,
    REPRESENTANTE_NOT    CHAR(50)             not null,
    CALLE_PRINCIPAL_NOT  CHAR(50)              null,
@@ -309,7 +309,7 @@ ID_PARROQUIA
 /* Table: PERSONA                                               */
 /*==============================================================*/
 create table PERSONA (
-   ID_PERSONA           INT8                 not null,
+   ID_PERSONA           SERIAL               not null,
    NOMBRE_PERSONA       CHAR(50)             not null,
    APELLIDO_PERSONA     CHAR(50)             not null,
    DOC_IDENT_PERSONA    CHAR(50)             not null,
@@ -332,7 +332,7 @@ ID_PERSONA
 /* Table: PREDIO                                                */
 /*==============================================================*/
 create table PREDIO (
-   ID_PREDIO            INT8                 not null,
+   ID_PREDIO            SERIAL               not null,
    ID_ZONA              INT8                 not null,
    ID_PROVINCIA         INT8                 not null,
    ID_CANTON            INT2                 not null,
@@ -348,6 +348,8 @@ create table PREDIO (
    CALLE_PRINCIPAL_PRE  CHAR(50)             not null,
    CALLE_SECUNDARIA_PRE CHAR(50)             not null,
    SITIO_REFERENCIA     CHAR(50)             not null,
+   ESTADO_PREDIO        CHAR(50)             not null,
+   NUM_TITULO_PREDIO    CHAR(10)             null,
    constraint PK_PREDIO primary key (ID_PREDIO)
 );
 
@@ -435,7 +437,7 @@ ID_CATASTRAL
 /* Table: PROPIETARIO                                           */
 /*==============================================================*/
 create table PROPIETARIO (
-   ID_PROPIETARIO       INT8                 not null,
+   ID_PROPIETARIO       SERIAL               not null,
    NRO_TITULO_PROPIEDAD INT8                 not null,
    constraint PK_PROPIETARIO primary key (ID_PROPIETARIO)
 ) INHERITS (PERSONA);
@@ -559,18 +561,54 @@ ID_SERV_TECNICO
 );
 
 /*==============================================================*/
+/* Table: DESCRIPCION_SOLICITUD                                 */
+/*==============================================================*/
+create table DESCRIPCION_SOLICITUD (
+   ID_DESCRIPCION       SERIAL               not null,
+   NRO_TITULO_PROPIEDAD INT8                 not null,
+   CLAVE_CATASTRAL      CHAR(50)             not null,
+   DESCRIPCION_E        CHAR(100)            not null,
+   constraint PK_DESCRIPCION_SOLICITUD primary key (ID_DESCRIPCION)
+);
+/*==============================================================*/
+/* Index: INDEX_DESCRIPCION_SOLICITUD_PK                        */
+/*==============================================================*/
+create unique index INDEX_DESCRIPCION_PK on DESCRIPCION_SOLICITUD (
+   ID_DESCRIPCION
+);
+
+
+/*==============================================================*/
+/* Table: FECHA_SOLICITUD                                       */
+/*==============================================================*/
+create table FECHA_SOLICITUD (
+   ID_FECHA             SERIAL                 not null,
+   FECHA_SOLICITUD      DATE                 not null,
+   FECHA_INICIO         DATE,
+   FECHA_FINAL          DATE,
+   constraint PK_FECHA_SOLICITUD primary key (ID_FECHA)
+);
+/*==============================================================*/
+/* Index: INDEX_FECHA_SOLICITUD_PK                              */
+/*==============================================================*/
+create unique index INDEX_FECHA_PK on FECHA_SOLICITUD (
+   ID_FECHA
+);
+
+
+
+/*==============================================================*/
 /* Table: SOLICITUD                                             */
 /*==============================================================*/
 create table SOLICITUD (
-   ID_SOLICITUD         INT8                 not null,
+   ID_SOLICITUD         SERIAL               not null,
    ID_CATASTRAL         INT8                 not null,
    ID_SERV_TECNICO      INT8                 not null,
    ID_PROPIETARIO       INT8                 not null,
    ID_TECNICO           INT8                 not null,
    ESTADO_SOLICITUD     CHAR(50)             not null,
-   FECHA_SOLICITUD      DATE                 not null,
-   FECHA_INICIO         DATE                     null,
-   FECHA_FINAL          DATE                     null,
+   ID_FECHA             INT8                 not null,
+   ID_DESCRIPCION       INT8                     null,
    MONTO_PAGAR          NUMERIC                  null,
    constraint PK_SOLICITUD primary key (ID_SOLICITUD)
 );
@@ -611,10 +649,28 @@ ID_PROPIETARIO
 );
 
 /*==============================================================*/
+/* Index: INDEX_FECHA_SOLICITUD_FK                              */
+/*==============================================================*/
+create  index INDEX_FECHA_SOLICITUD_FK on SOLICITUD (
+ID_FECHA
+);
+
+/*==============================================================*/
+/* Index: INDEX_DESCRIPCION_SOLICITUD_FK                        */
+/*==============================================================*/
+create  index INDEX_DESCRIPCION_SOLICITUD_FK on SOLICITUD (
+ID_DESCRIPCION
+);
+
+
+
+
+
+/*==============================================================*/
 /* Table: TECNICO                                               */
 /*==============================================================*/
 create table TECNICO (
-   ID_TECNICO           INT8                 not null,
+   ID_TECNICO           SERIAL               not null,
    ID_SERV_TECNICO      INT8                 not null,
    FECHA_CONT_TECNICO   DATE                 not null,
    PAGO_MENSUAL         NUMERIC              not null,
@@ -912,6 +968,16 @@ alter table SOLICITUD
       references SERVICIO_TECNICO (ID_SERV_TECNICO)
       on delete restrict on update restrict;
 
+alter table SOLICITUD
+   add constraint FK_SOLICITU_RELATIONS_FECHA foreign key (ID_FECHA)
+      references FECHA_SOLICITUD (ID_FECHA)
+      on delete cascade on update cascade;
+
+alter table SOLICITUD
+   add constraint FK_SOLICITU_RELATIONS_DESCRIPCION foreign key (ID_DESCRIPCION)
+      references DESCRIPCION_SOLICITUD (ID_DESCRIPCION)
+      on delete cascade on update cascade;
+
 
 
 /*==============================================================*/
@@ -922,3 +988,10 @@ alter table TECNICO
    add constraint FK_TECNICO_RELATIONS_SERVICIO foreign key (ID_SERV_TECNICO)
       references SERVICIO_TECNICO (ID_SERV_TECNICO)
       on delete restrict on update restrict;
+
+/*==============================================================*/
+/* ADD CHECK                                                    */
+/*==============================================================*/
+
+
+alter table predio add check (char_length(num_titulo_predio) > 0 OR char_length(num_titulo_predio) <=10);
